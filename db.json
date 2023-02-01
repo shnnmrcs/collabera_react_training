@@ -15,12 +15,72 @@
     {
       "cityName": "Ahmedabad",
       "temp": 30,
-      "tempType": "C"
+      "tempType": "°C"
+    },
+    {
+      "cityName": "Beijing",
+      "temp": 32,
+      "tempType": "°F"
+    },
+    {
+      "cityName": "Berlin",
+      "temp": 41,
+      "tempType": "°F"
+    },
+    {
+      "cityName": "Boston",
+      "temp": -5,
+      "tempType": "°C"
+    },
+    {
+      "cityName": "Kingston",
+      "temp": 26,
+      "tempType": "°C"
+    },
+    {
+      "cityName": "Kyiv",
+      "temp": 0,
+      "tempType": "°C"
+    },
+    {
+      "cityName": "Las Vegas",
+      "temp": 37.4,
+      "tempType": "°F"
+    },
+    {
+      "cityName": "New York",
+      "temp": -1,
+      "tempType": "°C"
+    },
+    {
+      "cityName": "Manila",
+      "temp": 33,
+      "tempType": "°C"
+    },
+    {
+      "cityName": "Miami",
+      "temp": 73.4,
+      "tempType": "°F"
     },
     {
       "cityName": "Mumbai",
-      "temp": 30,
-      "tempType": "C"
+      "temp": 23,
+      "tempType": "°C"
+    },
+    {
+      "cityName": "Rome",
+      "temp": 2,
+      "tempType": "°C"
+    },
+    {
+      "cityName": "San Francisco",
+      "temp": 46.4,
+      "tempType": "°F"
+    },
+    {
+      "cityName": "Tokyo",
+      "temp": 53.6,
+      "tempType": "°F"
     }
   ]
 }

@@ -1,0 +1,40 @@
+.weather {
+  @apply flex flex-col justify-center items-center h-screen;
+
+  &__title {
+    @apply text-2xl my-4 text-blue-500;
+  }
+
+  &__form {
+    @apply my-4;
+  }
+}
+
+.weather_form {
+  &__input {
+    @apply rounded-l-md;
+  }
+  &__btn {
+    @apply btn rounded-r-md;
+  }
+}
+
+.weather_table {
+  @apply w-3/5 border-slate-800 bg-white shadow-md mb-8 mt-4;
+
+  &__th {
+    @apply text-left w-1/3 border-b dark:border-slate-600 font-semibold px-6 py-4 bg-indigo-600 text-white;
+  }
+
+  &__tbody {
+    @apply overflow-y-auto max-h-10;
+  }
+
+  &__td {
+    @apply border-b w-1/3 px-6 py-3;
+  }
+}
+
+.weather_error {
+  @apply text-red-600 mb-8;
+}
