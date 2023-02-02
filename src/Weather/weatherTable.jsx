@@ -10,7 +10,7 @@ function WeatherTable({ cityList }) {
         <thead>
           <tr>
             <th className="weather_table__th">Name</th>
-            <th className="weather_table__th">Temp</th>
+            <th className="weather_table__th">Temperature</th>
             <th className="weather_table__th">Temp Type</th>
           </tr>
         </thead>

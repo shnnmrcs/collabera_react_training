@@ -6,33 +6,26 @@ import WeatherClear from './weatherClear';
 
 export default class Weather extends Component {
   state = {
+    dbCityList: null,
     cityList: [],
     error: null,
   };
 
   cityName = createRef();
 
-  searchCity = async event => {
+  async componentDidMount() {
+    this.getDBData();
+  }
+
+  getDBData = async () => {
     try {
-      event.preventDefault();
-      const cityName = this.cityName.current.value;
-      const url = `http://localhost:3000/weatherList?cityName=${cityName}`;
+      const url = 'http://localhost:3000/weatherList';
       const res = await fetch(url);
       const json = await res.json();
 
-      const compare = json.find(
-        item => item.cityName.toLowerCase() === cityName.toLowerCase(),
-      );
-
-      //   if (json.length > 0) {
-      if (compare) {
-        this.addCity(compare);
-      } else {
-        this.setState(() => ({
-          error: `'${cityName}' is not in the Record.`,
-        }));
-      }
-      this.cityName.current.value = '';
+      this.setState(() => ({
+        dbCityList: json,
+      }));
 
       if (!res.ok) {
         throw new Error(json);
@@ -40,6 +33,39 @@ export default class Weather extends Component {
     } catch (error) {
       this.setState({ error });
     }
+  };
+
+  searchCity = async event => {
+    event.preventDefault();
+    const cityName = this.cityName.current.value;
+    const { dbCityList, cityList } = this.state;
+
+    const hasDBRecord = dbCityList.find(
+      item => item.cityName.toLowerCase() === cityName.toLowerCase(),
+    );
+    const isListed = cityList.find(
+      item => item.cityName.toLowerCase() === cityName.toLowerCase(),
+    );
+
+    // There is no DB Record
+    if (hasDBRecord === undefined) {
+      this.setState(() => ({
+        error: `There is no '${cityName}' in the record.`,
+      }));
+    }
+    // User has already listed the city
+    if (isListed !== undefined) {
+      this.setState(() => ({
+        error: `'${cityName}' is already in the listed.`,
+      }));
+    }
+
+    // Add city to list if found in DB and not yer listed
+    if (hasDBRecord !== undefined && isListed === undefined) {
+      this.addCity(hasDBRecord);
+    }
+
+    this.cityName.current.value = '';
   };
 
   addCity = city => {
@@ -59,10 +85,7 @@ export default class Weather extends Component {
   render() {
     console.log('Weather App');
     const { cityList, error } = this.state;
-
-    if (error?.message === 'Failed to fetch') {
-      return <h1>{error.message}</h1>;
-    }
+    console.log(error);
 
     return (
       <div className="weather">
