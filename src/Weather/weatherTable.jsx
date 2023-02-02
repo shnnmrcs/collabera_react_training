@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 function WeatherTable({ cityList }) {
-  console.log('WeatherTable render');
+  // console.log('WeatherTable render');
 
   if (cityList.length > 0) {
     return (
@@ -16,7 +16,7 @@ function WeatherTable({ cityList }) {
         </thead>
         <tbody className="weather_table__tbody">
           {cityList.map(item => (
-            <tr key={item.cityName}>
+            <tr key={item.id}>
               <td className="weather_table__td">{item.cityName}</td>
               <td className="weather_table__td">{item.temp}</td>
               <td className="weather_table__td">{item.tempType}</td>
@@ -32,6 +32,7 @@ function WeatherTable({ cityList }) {
 WeatherTable.propTypes = {
   cityList: PropTypes.arrayOf(
     PropTypes.exact({
+      id: PropTypes.number,
       cityName: PropTypes.string,
       temp: PropTypes.number,
       tempType: PropTypes.string,

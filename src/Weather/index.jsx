@@ -10,32 +10,31 @@ export default class Weather extends Component {
     error: null,
   };
 
-  cityName = createRef();
+  cityInput = createRef();
 
   searchCity = async event => {
     try {
       event.preventDefault();
-      const cityName = this.cityName.current.value;
+      const cityName = this.cityInput.current.value;
       const url = `http://localhost:3000/weatherList?cityName=${cityName}`;
       const res = await fetch(url);
       const json = await res.json();
-
-      const compare = json.find(
-        item => item.cityName.toLowerCase() === cityName.toLowerCase(),
-      );
-
-      //   if (json.length > 0) {
-      if (compare) {
-        this.addCity(compare);
-      } else {
-        this.setState(() => ({
-          error: `'${cityName}' is not in the Record.`,
-        }));
-      }
-      this.cityName.current.value = '';
+      const { cityList } = this.state;
+      const isListed = json.length > 0 ? cityList.find(item => item.cityName === json[0].cityName) : false;
+      console.log(isListed);
 
       if (!res.ok) {
         throw new Error(json);
+      }
+
+      if (json.length === 0) {
+        const err = `There is no '${cityName}' in the record.`;
+        this.setErr(err);
+      } else if (isListed) {
+        const err = `'${cityName}' is already in the listed.`;
+        this.setErr(err);
+      } else {
+        this.addCity(json[0]);
       }
     } catch (error) {
       this.setState({ error });
@@ -43,34 +42,58 @@ export default class Weather extends Component {
   };
 
   addCity = city => {
-    const add = city;
-    this.setState(({ cityList }) => ({
-      cityList: [...cityList, add],
-      error: null,
-    }));
+    this.setState(
+      ({ cityList }) => ({
+        cityList: [...cityList, city],
+        error: null,
+      }),
+      () => {
+        this.cityInput.current.value = '';
+      },
+    );
+  };
+
+  setErr = err => {
+    console.log(err);
+    this.setState(
+      () => ({
+        error: err,
+      }),
+      () => {
+        this.cityInput.current.value = '';
+      },
+    );
   };
 
   clearCity = () => {
-    this.setState(() => ({
-      cityList: [],
-    }));
+    this.setState(
+      () => ({
+        cityList: [],
+        error: null,
+      }),
+      () => {
+        this.cityInput.current.value = '';
+      },
+    );
   };
 
   render() {
-    console.log('Weather App');
+    // console.log('Weather App');
     const { cityList, error } = this.state;
-
-    if (error?.message === 'Failed to fetch') {
-      return <h1>{error.message}</h1>;
-    }
+    const showApp = error?.message !== 'Failed to fetch';
 
     return (
       <div className="weather">
         <h1 className="weather__title">Weather App</h1>
-        <WeatherForm ref={this.cityName} searchCity={this.searchCity} />
-        {error != null && <div className="weather_error">{error}</div>}
-        <WeatherTable cityList={cityList} />
-        {cityList.length > 0 && <WeatherClear clearCity={this.clearCity} />}
+        {!showApp && <h1>{error?.message}</h1>}
+        {showApp && (
+          <>
+            <WeatherForm ref={this.cityInput} searchCity={this.searchCity} />
+            {error != null && <div className="weather_error">{error}</div>}
+            <WeatherTable cityList={cityList} />
+            {cityList.length > 0 && <WeatherClear clearCity={this.clearCity} />}
+          </>
+        )}
       </div>
     );
   }

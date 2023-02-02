@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 function WeatherClear({ clearCity }) {
-  console.log('WeatherClear render');
+  // console.log('WeatherClear render');
 
   return (
     <div className="flex">

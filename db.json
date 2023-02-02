@@ -13,71 +13,85 @@
   ],
   "weatherList": [
     {
+      "id": 1,
       "cityName": "Ahmedabad",
       "temp": 30,
       "tempType": "°C"
     },
     {
+      "id": 2,
       "cityName": "Beijing",
       "temp": 32,
       "tempType": "°F"
     },
     {
+      "id": 3,
       "cityName": "Berlin",
       "temp": 41,
       "tempType": "°F"
     },
     {
+      "id": 4,
       "cityName": "Boston",
       "temp": -5,
       "tempType": "°C"
     },
     {
+      "id": 5,
       "cityName": "Kingston",
       "temp": 26,
       "tempType": "°C"
     },
     {
+      "id": 6,
       "cityName": "Kyiv",
       "temp": 0,
       "tempType": "°C"
     },
     {
+      "id": 7,
       "cityName": "Las Vegas",
       "temp": 37.4,
       "tempType": "°F"
     },
     {
+      "id": 8,
       "cityName": "New York",
       "temp": -1,
       "tempType": "°C"
     },
     {
+      "id": 9,
       "cityName": "Manila",
       "temp": 33,
       "tempType": "°C"
     },
     {
+      "id": 10,
       "cityName": "Miami",
       "temp": 73.4,
       "tempType": "°F"
     },
     {
+      "id": 11,
       "cityName": "Mumbai",
       "temp": 23,
       "tempType": "°C"
     },
     {
+      "id": 12,
       "cityName": "Rome",
       "temp": 2,
       "tempType": "°C"
     },
     {
+      "id": 13,
       "cityName": "San Francisco",
       "temp": 46.4,
       "tempType": "°F"
     },
     {
+      "id": 14,
       "cityName": "Tokyo",
       "temp": 53.6,
       "tempType": "°F"
